@@ -1,12 +1,13 @@
+import Loading from "@/components/UI/loading";
 import { useGetProductQuery } from "@/data/product/use-get-product.query";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data } = useGetProductQuery(id as string);
+  const { data, isLoading } = useGetProductQuery(id as string);
 
-  console.log("product", data);
+  if (isLoading) return <Loading />;
 
   return (
     <Box

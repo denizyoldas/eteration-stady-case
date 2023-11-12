@@ -1,7 +1,6 @@
 import { AppContext } from "@/context/app-context";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { Box, Typography } from "@mui/material";
-import CountUp from "react-countup";
 import { useContext } from "react";
 
 const TotalBasket = () => {
@@ -17,7 +16,7 @@ const TotalBasket = () => {
     >
       <WorkOutlineIcon fontSize="medium" />
       <Typography variant="body1" noWrap component="div">
-        <CountUp end={total} suffix="₺" />
+        {total} ₺
       </Typography>
     </Box>
   );

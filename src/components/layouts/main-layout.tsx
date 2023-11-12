@@ -10,11 +10,11 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <>
       <Header />
-      asdads
       <Container
+        maxWidth="xl"
         sx={{
           mt: 10,
-          mx: { sm: "140px" },
+          // mx: { xs: "20px", sm: "60px", md: "100px", lg: "100px" },
           display: "flex",
           justifyContent: "space-between",
           pb: 2,

@@ -1,10 +1,20 @@
 import { AppContext } from "@/context/app-context";
-import { Box, Paper } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import { useContext } from "react";
+import ButtonGroup from "./UI/button-group";
+import { Product } from "@/types/product/index.model";
 
 const Basket = () => {
-  const context = useContext(AppContext);
-  const { basket } = context;
+  const { total, basket, itemCountDecrement, itemCountIncrement } =
+    useContext(AppContext);
+
+  const handleIncrement = (product: Product) => {
+    itemCountIncrement(product);
+  };
+
+  const handleDecrement = (product: Product) => {
+    itemCountDecrement(product);
+  };
 
   return (
     <Box
@@ -26,10 +36,38 @@ const Basket = () => {
               borderBottom: "1px solid #ccc",
             }}
           >
-            <Box>{item.product.name}</Box>
-            <Box>{item.count}</Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Typography>{item.product.name}</Typography>
+              <Typography>{item.product.price}</Typography>
+            </Box>
+
+            <Box>
+              <ButtonGroup
+                count={Number(item.count)}
+                handleDecrement={() => handleDecrement(item.product)}
+                handleIncrement={() => handleIncrement(item.product)}
+              />
+            </Box>
           </Box>
         ))}
+      </Paper>
+
+      <Paper>
+        <Box>
+          <Typography>
+            Total Price: <Typography color="primary.main">{total}₺</Typography>
+          </Typography>
+          <Button fullWidth variant="contained">
+            Checkout
+          </Button>
+        </Box>
       </Paper>
     </Box>
   );

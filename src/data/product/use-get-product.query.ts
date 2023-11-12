@@ -1,21 +1,13 @@
 import { Product } from "@/types/product/index.model";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
+import API from "@/api";
 
-export const useGetProductQuery = (id: string) => {
-  const queryClient = useQueryClient();
-  return useQuery(
-    ["product", id],
-    () => {
-      const products = queryClient.getQueryData("products") as Product[];
-
-      if (!products) {
-        queryClient.prefetchQuery("products");
-      }
-
-      return products?.find((product: Product) => product.id === id);
-    },
-    {
-      enabled: !!id,
-    }
-  );
+const getProduct = async (id: string) => {
+  const { data } = await API.get<Product>(`/products/${id}`);
+  return data;
 };
+
+export const useGetProductQuery = (id: string) =>
+  useQuery(["product", id], () => getProduct(id), {
+    enabled: !!id,
+  });

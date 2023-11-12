@@ -1,16 +1,21 @@
 import { Box, Toolbar, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Search from "./form/search";
-import { useState } from "react";
+import { useContext } from "react";
 import Avatar from "./UI/avatar";
 import TotalBasket from "./UI/total-basket";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "@/context/app-context";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [searchValue, setSearchValue] = useState("");
+  const { filter, filterChange } = useContext(AppContext);
 
   const goToHome = () => navigate("/");
+
+  const searchValueChangeHandler = (value: string) => {
+    filterChange({ ...(filter || {}), searchTerm: value });
+  };
 
   return (
     <MuiAppBar
@@ -52,9 +57,9 @@ const Header = () => {
             </Typography>
 
             <Search
-              value={searchValue}
+              value={filter?.searchTerm}
               placeholder="Search"
-              onChange={setSearchValue}
+              onChange={searchValueChangeHandler}
             />
           </Box>
 
