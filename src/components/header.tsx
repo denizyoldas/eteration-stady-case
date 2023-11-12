@@ -1,19 +1,69 @@
-import { Toolbar } from "@mui/material";
+import { Box, Toolbar, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
-
-const drawerWidth = 240;
+import Search from "./form/search";
+import { useState } from "react";
+import Avatar from "./UI/avatar";
+import TotalBasket from "./UI/total-basket";
 
 const Header = () => {
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <MuiAppBar
       position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
-        ml: { sm: `${drawerWidth}px` },
-        backgroundColor: "#003399",
+        px: { sm: "140px" },
       }}
     >
-      <Toolbar />
+      <Toolbar>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                fontSize: "24px",
+                fontStyle: "normal",
+                fontWeight: 800,
+                lineHeight: "normal",
+                mr: "130px",
+              }}
+            >
+              Eteration
+            </Typography>
+
+            <Search
+              value={searchValue}
+              placeholder="Search"
+              onChange={setSearchValue}
+            />
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+            }}
+          >
+            <TotalBasket />
+            <Avatar />
+          </Box>
+        </Box>
+      </Toolbar>
     </MuiAppBar>
   );
 };

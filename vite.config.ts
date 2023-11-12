@@ -5,10 +5,10 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    // alias: {
-    //   "@": __dirname + "/src",
-    //   "@components": __dirname + "/src/components",
-    //   "@pages": __dirname + "/src/pages",
-    // },
+    alias: {
+      "@": __dirname + "/src",
+      "@components": __dirname + "/src/components",
+      "@pages": __dirname + "/src/pages",
+    },
   },
 });
