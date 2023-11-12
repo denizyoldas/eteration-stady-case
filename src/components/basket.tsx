@@ -1,9 +1,9 @@
-import { BasketContext } from "@/context/basket-context";
+import { AppContext } from "@/context/app-context";
 import { Box, Paper } from "@mui/material";
 import { useContext } from "react";
 
 const Basket = () => {
-  const context = useContext(BasketContext);
+  const context = useContext(AppContext);
   const { basket } = context;
 
   return (
@@ -17,6 +17,7 @@ const Basket = () => {
       <Paper>
         {basket.map((item) => (
           <Box
+            key={item.product.id}
             sx={{
               display: "flex",
               justifyContent: "space-between",

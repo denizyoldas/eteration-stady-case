@@ -17,6 +17,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           mx: { sm: "140px" },
           display: "flex",
           justifyContent: "space-between",
+          pb: 2,
         }}
       >
         {children}

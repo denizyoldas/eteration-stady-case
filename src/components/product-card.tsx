@@ -1,4 +1,4 @@
-import { BasketContext } from "@/context/basket-context";
+import { AppContext } from "@/context/app-context";
 import { Product } from "@/types/product/index.model";
 import {
   CardMedia,
@@ -9,13 +9,19 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps extends Product {}
 
 const ProductCard = (product: ProductCardProps) => {
-  const { addToBasket } = useContext(BasketContext);
+  const { addToBasket } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const addToCardHandler = () => addToBasket(product);
+
+  const goToDetail = () => {
+    navigate(`/product/${product.id}`);
+  };
 
   return (
     <Card
@@ -25,15 +31,17 @@ const ProductCard = (product: ProductCardProps) => {
       }}
     >
       <CardMedia
-        // sx={{
-        //   width: "160px",
-        //   height: "150px",
-        // }}
+        sx={{
+          cursor: "pointer",
+          // width: "160px",
+          // height: "150px",
+        }}
         component="img"
         width="160"
         height="150"
         image={product.image}
         alt={product.name}
+        onClick={goToDetail}
       />
 
       <CardContent>

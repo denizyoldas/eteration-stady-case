@@ -1,14 +1,13 @@
+import Loading from "@/components/UI/loading";
 import Filter from "@/components/filter";
 import ProductCard from "@/components/product-card";
 import { useGetProductsQuery } from "@/data/product/use-get-products.query";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Pagination } from "@mui/material";
 
 const HomePage = () => {
   const { data, isLoading } = useGetProductsQuery();
 
-  console.log(data);
-
-  if (isLoading) return <Box>Loading...</Box>;
+  if (isLoading) return <Loading />;
 
   return (
     <Box
@@ -19,10 +18,21 @@ const HomePage = () => {
       <Filter />
       <Grid container spacing={2}>
         {data?.map((product) => (
-          <Grid item xs={3}>
-            <ProductCard key={product.id} {...product} />
+          <Grid item xs={12} sm={4} md={3} key={product.id}>
+            <ProductCard {...product} />
           </Grid>
         ))}
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Pagination count={10} size="small" />
+        </Grid>
       </Grid>
     </Box>
   );

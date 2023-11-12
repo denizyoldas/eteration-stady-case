@@ -1,7 +1,7 @@
 import { Product } from "@/types/product/index.model";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-interface BasketContextType {
+interface AppContextType {
   basket: { product: Product; count: number }[];
   total: number;
   addToBasket: (product: Product) => void;
@@ -10,22 +10,32 @@ interface BasketContextType {
   itemCountDecrement: (product: Product) => void;
 }
 
-const initialState: BasketContextType = {
-  basket: [],
-  total: 0,
+const initialState: AppContextType = {
+  basket: localStorage.getItem("basket")
+    ? JSON.parse(localStorage.getItem("basket") || "[]")
+    : [],
+  total: localStorage.getItem("total")
+    ? Number(localStorage.getItem("total"))
+    : 0,
   addToBasket: () => {},
   removeFromBasket: () => {},
   itemCountIncrement: () => {},
   itemCountDecrement: () => {},
 };
 
-const BasketContext = createContext(initialState);
+const AppContext = createContext(initialState);
 
-const BasketProvider = ({ children }: { children: React.ReactNode }) => {
+const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [basket, setBasket] = useState<{ product: Product; count: number }[]>(
-    []
+    initialState.basket
   );
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(initialState.total);
+
+  // Update local storage whenever basket or total changes
+  useEffect(() => {
+    localStorage.setItem("basket", JSON.stringify(basket));
+    localStorage.setItem("total", total.toString());
+  }, [basket, total]);
 
   const addToBasket = (product: Product) => {
     const basketItem = basket.find((item) => item.product.id === product.id);
@@ -70,7 +80,7 @@ const BasketProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <BasketContext.Provider
+    <AppContext.Provider
       value={{
         basket,
         total,
@@ -81,8 +91,8 @@ const BasketProvider = ({ children }: { children: React.ReactNode }) => {
       }}
     >
       {children}
-    </BasketContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export { BasketProvider, BasketContext };
+export { AppProvider, AppContext };

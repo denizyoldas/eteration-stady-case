@@ -5,7 +5,7 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ThemeProvider from "./theme/index.tsx";
-import { BasketProvider } from "./context/basket-context.tsx";
+import { AppProvider } from "./context/app-context.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BasketProvider>
+    <AppProvider>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <ThemeProvider>
@@ -28,6 +28,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           </ThemeProvider>
         </BrowserRouter>
       </QueryClientProvider>
-    </BasketProvider>
+    </AppProvider>
   </React.StrictMode>
 );

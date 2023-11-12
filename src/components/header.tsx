@@ -4,9 +4,13 @@ import Search from "./form/search";
 import { useState } from "react";
 import Avatar from "./UI/avatar";
 import TotalBasket from "./UI/total-basket";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
+
+  const goToHome = () => navigate("/");
 
   return (
     <MuiAppBar
@@ -31,6 +35,7 @@ const Header = () => {
             }}
           >
             <Typography
+              onClick={goToHome}
               variant="h6"
               noWrap
               component="div"
@@ -40,6 +45,7 @@ const Header = () => {
                 fontWeight: 800,
                 lineHeight: "normal",
                 mr: "130px",
+                cursor: "pointer",
               }}
             >
               Eteration

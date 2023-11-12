@@ -1,11 +1,11 @@
-import { BasketContext } from "@/context/basket-context";
+import { AppContext } from "@/context/app-context";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { Box, Typography } from "@mui/material";
 import CountUp from "react-countup";
 import { useContext } from "react";
 
 const TotalBasket = () => {
-  const { total } = useContext(BasketContext);
+  const { total } = useContext(AppContext);
 
   return (
     <Box
