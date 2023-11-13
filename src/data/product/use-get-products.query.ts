@@ -1,5 +1,5 @@
 import API from "@/api";
-import { QueryParams } from "@/types/index.model";
+import { Brand, QueryParams } from "@/types/index.model";
 import { Product } from "@/types/product/index.model";
 // import { DUMMY } from "@/utils/dummy";
 import { useQuery } from "react-query";
@@ -9,6 +9,25 @@ const getProducts = async (params?: QueryParams) => {
   const { data } = await API.get<Product[]>("/products", {
     params,
   });
+
+  const brands: Brand[] = [];
+
+  data.forEach((product: Product) => {
+    const brand = brands.find((brand) => brand.brand === product.brand);
+
+    if (brand) {
+      if (!brand.models.includes(product.model))
+        brand.models.push(product.model);
+    } else {
+      brands.push({
+        brand: product.brand,
+        models: [product.model],
+      });
+    }
+  });
+
+  localStorage.setItem("brands", JSON.stringify(brands));
+
   return data;
 };
 

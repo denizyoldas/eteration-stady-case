@@ -11,3 +11,8 @@ export interface QueryParams {
   sortBy?: string;
   name?: string;
 }
+
+export interface Brand {
+  brand: string;
+  models: string[];
+}

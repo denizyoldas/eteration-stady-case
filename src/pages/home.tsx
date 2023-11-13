@@ -14,13 +14,27 @@ const HomePage = () => {
     ...SORT?.find((item) => item.id === filter?.sortBy),
   });
 
+  // filter data
+  const filteredData = data?.filter((item) => {
+    const brandFilter = filter?.brands?.length
+      ? filter?.brands?.includes(item.brand)
+      : true;
+    const modelFilter = filter?.models?.length
+      ? filter?.models?.includes(item.model)
+      : true;
+
+    return brandFilter && modelFilter;
+  });
+
+  console.log("filteredData", filteredData);
+
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const currentProducts = data?.slice(startIndex, endIndex);
+  const currentProducts = filteredData?.slice(startIndex, endIndex);
 
   const handlePageChange = (_: unknown, value: number) => {
     setCurrentPage(value);

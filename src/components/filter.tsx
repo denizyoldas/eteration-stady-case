@@ -1,4 +1,6 @@
 import { AppContext } from "@/context/app-context";
+import useLocalStorage from "@/hook/use-local-storage";
+import { Brand } from "@/types/index.model";
 import { SORT } from "@/utils/filter";
 import {
   Box,
@@ -10,14 +12,20 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { useContext } from "react";
-
-const BRANDS = ["Apple", "Samsung", "Huawei", "Xiaomi", "Oppo", "Vivo"];
-
-const MODELS = ["iPhone 12", "iPhone 12 Pro", "iPhone 12 Pro Max"];
+import { useContext, useEffect, useState } from "react";
 
 const Filter = () => {
   const { filterChange, filter } = useContext(AppContext);
+  const [brands] = useLocalStorage<Brand[]>("brands", []);
+  const [selectedBrands, setSelectedBrands] = useState<Brand[]>([]);
+
+  useEffect(() => {
+    filterChange({
+      ...filter,
+      brands: selectedBrands.map((item) => item.brand),
+      models: selectedBrands.map((item) => item.models).flat(),
+    });
+  }, [selectedBrands]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     filterChange({ ...filter, sortBy: Number(event.target.value) });
@@ -59,15 +67,25 @@ const Filter = () => {
       <Paper
         sx={{
           p: 2,
+          maxHeight: "200px",
+          overflowY: "scroll",
         }}
       >
-        <FormGroup>
-          {BRANDS.map((item) => (
+        <FormGroup
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onChange={(e: any) => {
+            const brand = brands.find((item) => item.brand === e.target.value);
+            if (brand) {
+              setSelectedBrands([...selectedBrands, brand]);
+            }
+          }}
+        >
+          {brands.map((item) => (
             <FormControlLabel
-              key={item}
+              key={item.brand}
               control={<Checkbox />}
-              label={item}
-              value={item}
+              label={item.brand}
+              value={item.brand}
             />
           ))}
         </FormGroup>
@@ -77,17 +95,21 @@ const Filter = () => {
       <Paper
         sx={{
           p: 2,
+          maxHeight: "200px",
+          overflowY: "scroll",
         }}
       >
         <FormGroup>
-          {MODELS.map((item) => (
-            <FormControlLabel
-              key={item}
-              control={<Checkbox />}
-              label={item}
-              value={item}
-            />
-          ))}
+          {selectedBrands.map((brand) =>
+            brand.models.map((item) => (
+              <FormControlLabel
+                key={item}
+                control={<Checkbox />}
+                label={item}
+                value={item}
+              />
+            ))
+          )}
         </FormGroup>
       </Paper>
     </Box>
