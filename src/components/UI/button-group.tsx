@@ -15,7 +15,18 @@ const ButtonGroup = ({
   return (
     <MUIButtonGroup size="small" aria-label="small outlined button group">
       <Button onClick={handleDecrement}>-</Button>
-      <Button disabled>{count}</Button>
+      <Button
+        disabled
+        sx={{
+          "&:disabled": {
+            backgroundColor: "primary.main",
+            color: "white",
+            fontSize: "18px",
+          },
+        }}
+      >
+        {count}
+      </Button>
       <Button onClick={handleIncrement}>+</Button>
     </MUIButtonGroup>
   );

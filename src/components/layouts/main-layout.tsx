@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import Header from "../header";
 import Basket from "../basket";
 
@@ -14,14 +14,17 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         maxWidth="xl"
         sx={{
           mt: 10,
-          // mx: { xs: "20px", sm: "60px", md: "100px", lg: "100px" },
-          display: "flex",
-          justifyContent: "space-between",
           pb: 2,
         }}
       >
-        {children}
-        <Basket />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={9}>
+            {children}
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <Basket />
+          </Grid>
+        </Grid>
       </Container>
     </>
   );

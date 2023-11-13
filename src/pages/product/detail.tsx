@@ -13,6 +13,8 @@ const ProductDetailPage = () => {
     <Box
       sx={{
         width: "100%",
+
+        p: 2,
       }}
     >
       <Paper>

@@ -28,6 +28,7 @@ const ProductCard = (product: ProductCardProps) => {
       sx={{
         backgroundColor: "white",
         padding: "10px",
+        // height: "100%",
       }}
     >
       <CardMedia
@@ -44,7 +45,11 @@ const ProductCard = (product: ProductCardProps) => {
         onClick={goToDetail}
       />
 
-      <CardContent>
+      <CardContent
+        sx={{
+          px: 0,
+        }}
+      >
         <Typography variant="h6" component="div" color="primary.main">
           {product.price} ₺
         </Typography>
@@ -53,7 +58,11 @@ const ProductCard = (product: ProductCardProps) => {
         </Typography>
       </CardContent>
 
-      <CardActions>
+      <CardActions
+        sx={{
+          px: 0,
+        }}
+      >
         <Button
           size="small"
           color="primary"

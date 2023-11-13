@@ -1,8 +1,9 @@
-import { AppContext } from "@/context/app-context";
 import { Box, Button, Paper, Typography } from "@mui/material";
+import { AppContext } from "@/context/app-context";
 import { useContext } from "react";
 import ButtonGroup from "./UI/button-group";
 import { Product } from "@/types/product/index.model";
+import { NumericFormat } from "react-number-format";
 
 const Basket = () => {
   const { total, basket, itemCountDecrement, itemCountIncrement } =
@@ -17,13 +18,7 @@ const Basket = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: "200px",
-        height: "100vh",
-        ml: "28px",
-      }}
-    >
+    <Box>
       <Paper>
         {basket.map((item) => (
           <Box
@@ -41,13 +36,14 @@ const Basket = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                alignItems: "center",
+                alignItems: "flex-start",
               }}
             >
               <Typography>{item.product.name}</Typography>
-              <Typography>{item.product.price}</Typography>
+              <Typography color="primary.main">
+                {item.product.price}₺
+              </Typography>
             </Box>
-
             <Box>
               <ButtonGroup
                 count={Number(item.count)}
@@ -59,15 +55,34 @@ const Basket = () => {
         ))}
       </Paper>
 
-      <Paper>
-        <Box>
-          <Typography>
-            Total Price: <Typography color="primary.main">{total}₺</Typography>
+      <Paper
+        sx={{
+          p: 2,
+          mt: 4,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            mb: 2,
+            gap: 1,
+          }}
+        >
+          <Typography variant="body1">Total Price:</Typography>
+          <Typography variant="h6" color="primary.main" fontWeight="bold">
+            <NumericFormat
+              value={total}
+              displayType={"text"}
+              thousandSeparator="."
+              decimalSeparator=","
+              suffix={"₺"}
+            />
           </Typography>
-          <Button fullWidth variant="contained">
-            Checkout
-          </Button>
         </Box>
+        <Button fullWidth variant="contained" disabled={basket.length === 0}>
+          Checkout
+        </Button>
       </Paper>
     </Box>
   );

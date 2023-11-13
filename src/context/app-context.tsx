@@ -2,7 +2,7 @@ import { Product } from "@/types/product/index.model";
 import { createContext, useEffect, useState } from "react";
 
 interface IFilter {
-  sortBy?: string;
+  sortBy?: number;
   brands?: string[];
   models?: string[];
   searchTerm?: string;
@@ -78,6 +78,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (basketItem) {
       basketItem.count++;
+      setTotal(total + Number(product.price));
       setBasket([...basket]);
     }
   };
@@ -88,6 +89,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     if (basketItem) {
       basketItem.count--;
       setBasket([...basket]);
+      setTotal(total - Number(product.price));
     }
 
     if (basketItem?.count === 0) {
