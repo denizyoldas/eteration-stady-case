@@ -49,7 +49,7 @@ const Header = () => {
                 fontStyle: "normal",
                 fontWeight: 800,
                 lineHeight: "normal",
-                mr: "130px",
+                mr: { xs: "10px", sm: "130px" },
                 cursor: "pointer",
               }}
             >
@@ -60,6 +60,9 @@ const Header = () => {
               value={filter?.searchTerm}
               placeholder="Search"
               onChange={searchValueChangeHandler}
+              sx={{
+                display: { xs: "none", sm: "block" },
+              }}
             />
           </Box>
 

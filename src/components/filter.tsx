@@ -37,6 +37,7 @@ const Filter = () => {
         width: "200px",
         height: "100vh",
         mr: 3,
+        display: { xs: "none", sm: "block" },
       }}
     >
       <Title text="Sort By" />
@@ -100,7 +101,7 @@ const Filter = () => {
         }}
       >
         <FormGroup>
-          {selectedBrands.map((brand) =>
+          {brands.map((brand) =>
             brand.models.map((item) => (
               <FormControlLabel
                 key={item}

@@ -26,8 +26,6 @@ const HomePage = () => {
     return brandFilter && modelFilter;
   });
 
-  console.log("filteredData", filteredData);
-
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -43,7 +41,7 @@ const HomePage = () => {
   return (
     <Box
       sx={{
-        display: "flex",
+        display: { xs: "block", sm: "flex" },
       }}
     >
       <Filter />

@@ -8,6 +8,8 @@ interface SearchProps {
   placeholder?: string;
   onChange: (value: string) => void;
   "data-testid"?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sx?: any;
 }
 
 export default function Search({
@@ -15,6 +17,7 @@ export default function Search({
   onChange,
   placeholder = "Search",
   "data-testid": dataTestId = "search",
+  sx,
 }: SearchProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -31,6 +34,7 @@ export default function Search({
       bgcolor="white"
       sx={{
         borderRadius: "4px",
+        ...sx,
       }}
     >
       <TextField
