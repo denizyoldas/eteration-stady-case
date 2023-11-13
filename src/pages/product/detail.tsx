@@ -20,8 +20,6 @@ const ProductDetailPage = () => {
   return (
     <Box
       sx={{
-        width: "100%",
-
         p: 2,
       }}
     >
