@@ -7,3 +7,43 @@
   /* Montserrat */
   font-family: "Montserrat", sans-serif;
 }
+
+/* Filter.css */
+
+.filter-container {
+  width: 200px;
+  height: 100vh;
+  margin-right: 3rem;
+  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+.filter-paper {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-paper-scroll {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-options-container {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.filter-title {
+  color: rgba(51, 51, 51, 0.7);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}

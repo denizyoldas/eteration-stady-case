@@ -1,5 +1,5 @@
 import Loading from "@/components/UI/loading";
-import Filter from "@/components/filter";
+import Filter, { FilterDrawer } from "@/components/filter";
 import ProductCard from "@/components/product-card";
 import { AppContext } from "@/context/app-context";
 import { useGetProductsQuery } from "@/data/product/use-get-products.query";
@@ -14,7 +14,6 @@ const HomePage = () => {
     ...SORT?.find((item) => item.id === filter?.sortBy),
   });
 
-  // filter data
   const filteredData = data?.filter((item) => {
     const brandFilter = filter?.brands?.length
       ? filter?.brands?.includes(item.brand)
@@ -45,6 +44,7 @@ const HomePage = () => {
       }}
     >
       <Filter />
+      <FilterDrawer />
       {isLoading ? (
         <Loading />
       ) : (

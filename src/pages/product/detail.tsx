@@ -1,13 +1,21 @@
 import Loading from "@/components/UI/loading";
+import { AppContext } from "@/context/app-context";
 import { useGetProductQuery } from "@/data/product/use-get-product.query";
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
+  const { addToBasket } = useContext(AppContext);
   const { data, isLoading } = useGetProductQuery(id as string);
 
   if (isLoading) return <Loading />;
+
+  const addToCartHandler = () => {
+    if (!data) return;
+    addToBasket(data);
+  };
 
   return (
     <Box
@@ -33,7 +41,11 @@ const ProductDetailPage = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Box>
+            <Box
+              sx={{
+                p: 2,
+              }}
+            >
               <Typography variant="h6" component="div">
                 {data?.name}
               </Typography>
@@ -45,6 +57,17 @@ const ProductDetailPage = () => {
               >
                 {data?.price} ₺
               </Typography>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                }}
+                onClick={addToCartHandler}
+              >
+                Add to Cart
+              </Button>
               <Typography paragraph>{data?.description}</Typography>
             </Box>
           </Grid>

@@ -119,4 +119,4 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export { AppProvider, AppContext };
+export { AppProvider, AppContext, IFilter };
