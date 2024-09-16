@@ -1,4 +1,4 @@
-import { AppContext } from "@/context/app-context";
+import useAppStore from "@/store/use-app-store";
 import { Product } from "@/types/product/index.model";
 import {
   CardMedia,
@@ -8,13 +8,12 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps extends Product {}
 
 const ProductCard = (product: ProductCardProps) => {
-  const { addToBasket } = useContext(AppContext);
+  const { addToBasket } = useAppStore((state) => state);
   const navigate = useNavigate();
 
   const addToCardHandler = () => addToBasket(product);

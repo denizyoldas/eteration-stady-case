@@ -1,8 +1,8 @@
-import { AppContext } from "@/context/app-context";
+import useAppStore from "@/store/use-app-store";
 import useLocalStorage from "@/hook/use-local-storage";
 import { Brand } from "@/types/index.model";
 import { Box, Drawer, IconButton, Paper, Typography } from "@mui/material";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import SortByFilter from "./sort-by-filter";
 import BrandFilter from "./brand-filter";
 import ModelFilter from "./model-filter";
@@ -45,7 +45,7 @@ export const FilterDrawer = () => {
 };
 
 const Filter = ({ isDrawer = false }: { isDrawer?: boolean }) => {
-  const { filterChange, filter } = useContext(AppContext);
+  const { filterChange, filter } = useAppStore((state) => state);
   const [brands] = useLocalStorage<Brand[]>("brands", []);
 
   return (

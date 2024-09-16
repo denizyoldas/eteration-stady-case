@@ -16,3 +16,10 @@ export interface Brand {
   brand: string;
   models: string[];
 }
+
+export interface IFilter {
+  sortBy?: number;
+  brands?: string[];
+  models?: string[];
+  searchTerm?: string;
+}

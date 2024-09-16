@@ -1,13 +1,13 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
-import { AppContext } from "@/context/app-context";
-import { useContext } from "react";
+import useAppStore from "@/store/use-app-store";
 import ButtonGroup from "./UI/button-group";
 import { Product } from "@/types/product/index.model";
 import { NumericFormat } from "react-number-format";
 
 const Basket = () => {
-  const { total, basket, itemCountDecrement, itemCountIncrement } =
-    useContext(AppContext);
+  const { total, basket, itemCountDecrement, itemCountIncrement } = useAppStore(
+    (state) => state
+  );
 
   const handleIncrement = (product: Product) => {
     itemCountIncrement(product);

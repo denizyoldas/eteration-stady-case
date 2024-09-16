@@ -1,13 +1,12 @@
 import Loading from "@/components/UI/loading";
-import { AppContext } from "@/context/app-context";
 import { useGetProductQuery } from "@/data/product/use-get-product.query";
+import useAppStore from "@/store/use-app-store";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
-import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
 const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { addToBasket } = useContext(AppContext);
+  const addToBasket = useAppStore((state) => state.addToBasket);
   const { data, isLoading } = useGetProductQuery(id as string);
 
   if (isLoading) return <Loading />;

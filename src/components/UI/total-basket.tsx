@@ -1,11 +1,10 @@
-import { AppContext } from "@/context/app-context";
+import useAppStore from "@/store/use-app-store";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import { Box, Typography } from "@mui/material";
-import { useContext } from "react";
 import { NumericFormat } from "react-number-format";
 
 const TotalBasket = () => {
-  const { total } = useContext(AppContext);
+  const { total } = useAppStore((state) => state);
 
   return (
     <Box

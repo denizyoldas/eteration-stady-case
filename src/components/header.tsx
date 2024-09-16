@@ -1,15 +1,14 @@
 import { Box, Toolbar, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Search from "./form/search";
-import { useContext } from "react";
 import Avatar from "./UI/avatar";
 import TotalBasket from "./UI/total-basket";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "@/context/app-context";
+import useAppStore from "@/store/use-app-store";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { filter, filterChange } = useContext(AppContext);
+  const { filter, filterChange } = useAppStore((state) => state);
 
   const goToHome = () => navigate("/");
 

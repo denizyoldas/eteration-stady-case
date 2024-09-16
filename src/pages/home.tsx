@@ -1,14 +1,14 @@
 import Loading from "@/components/UI/loading";
 import Filter, { FilterDrawer } from "@/components/filter";
 import ProductCard from "@/components/product-card";
-import { AppContext } from "@/context/app-context";
+import useAppStore from "@/store/use-app-store";
 import { useGetProductsQuery } from "@/data/product/use-get-products.query";
 import { SORT } from "@/utils/filter";
 import { Box, Grid, Pagination } from "@mui/material";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 const HomePage = () => {
-  const { filter } = useContext(AppContext);
+  const { filter } = useAppStore((state) => state);
   const { data, isLoading } = useGetProductsQuery({
     name: filter?.searchTerm || "",
     ...SORT?.find((item) => item.id === filter?.sortBy),
